@@ -18,14 +18,14 @@ export const TodoList = ({ todos, setCompleted, removeTodo }: Props) => {
   }, [todos, searchText])
 
   return (
-    <div className="p-5 max-w-96 w-full sm:max-w-full z-10 relative min-h-120">
+    <div className="p-5 max-w-96 w-full lg:max-w-full min-h-120">
       <div className="w-full max-w-96 m-auto mb-5">
         <FilterBar 
           searchText={searchText} 
           setSearchText={setSearchText} 
           amount={filterTodos.length}/>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-1 xl:gap-5">
+      <div className="grid grid-cols-1 lg:grid-cols-2  xl:grid-cols-3 gap-2 xl:gap-5 ">
         {searchText.length > 0
         ?filterTodos.map((todo) => (
           <TodoItem

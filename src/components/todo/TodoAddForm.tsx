@@ -71,7 +71,7 @@ export const TodoAddForm = ({ addTodo }: Props) => {
         border 
         border-gray-200 
         self-center 
-        sm:self-baseline 
+        
         p-5 
         rounded-2xl 
         w-full 
@@ -81,7 +81,7 @@ export const TodoAddForm = ({ addTodo }: Props) => {
           <Label htmlFor="title" className="text-white">Title</Label>
           <Input
             id="title"
-            placeholder="What are you going to do today?"
+            placeholder="What's up for today?"
             className={cn("bg-secondary border-border", {
               'border-red-400': errors.title
             })}

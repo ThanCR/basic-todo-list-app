@@ -22,7 +22,7 @@ export const DatePicker = ({ field: dateTime }: Props) => {
   const [open, setOpen] = React.useState(false)
 
   return (
-    <FieldGroup className="flex-row">
+    <FieldGroup className="flex flex-col  md:flex-row">
       <Field>
         <FieldLabel htmlFor="date-picker-optional" className="text-white">Date</FieldLabel>
         <Popover open={open} onOpenChange={setOpen}>
@@ -36,7 +36,7 @@ export const DatePicker = ({ field: dateTime }: Props) => {
               <ChevronDownIcon />
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="w-auto overflow-hidden p-0" align="start">
+          <PopoverContent className="w-auto overflow-hidden" align="start">
             <Calendar
               mode="single"
               selected={dateTime.value.date}

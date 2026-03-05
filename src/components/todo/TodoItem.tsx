@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -10,7 +9,7 @@ import {
 import type { Todo } from "@/models/Todo"
 import { formatDateToShow } from "./helpers/formatDeadline"
 import { cn } from "@/lib/utils"
-import { CheckLine, CircleMinus, Minus, Square, X } from "lucide-react"
+import { CheckLine, Minus, Square } from "lucide-react"
 import { useCountDown } from "./hook/useCountdown"
 import { formatMMSS } from "./helpers/formatMMSS"
 
@@ -28,7 +27,7 @@ export const TodoItem = ({ todo, setCompleted, removeTodo }: Props) => {
 
   return (
     <Card
-      className={cn("w-full max-w-sm relative border-3 ", {
+      className={cn("w-full max-w-sm relative border-3 justify-self-center ", {
         'border-green-600 text-green-600': completed
       })}
 

@@ -8,17 +8,17 @@ export const Container = () => {
 
   return (
     <div className="
-      flex 
-      flex-col-reverse 
-      items-center 
-      justify-center 
-      gap-5 
-      m-auto 
-      sm:flex-row 
-      w-9/10 
+      flex
+      flex-col-reverse
+      items-center
+      justify-center
+      gap-5
+      m-auto
+      lg:flex-row
+      w-9/10
       border
       border-gray-400
-      p-5 
+      p-5
       rounded-2xl 
       bg-mist-500/20
       backdrop-blur-sm
