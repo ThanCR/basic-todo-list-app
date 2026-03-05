@@ -10,10 +10,9 @@ import {
 import type { Todo } from "@/models/Todo"
 import { formatDateToShow } from "./helpers/formatDeadline"
 import { cn } from "@/lib/utils"
-import { CheckLine, Square, X } from "lucide-react"
+import { CheckLine, CircleMinus, Minus, Square, X } from "lucide-react"
 import { useCountDown } from "./hook/useCountdown"
 import { formatMMSS } from "./helpers/formatMMSS"
-import { useState } from "react"
 
 interface Props {
   todo: Todo,
@@ -24,7 +23,7 @@ interface Props {
 export const TodoItem = ({ todo, setCompleted, removeTodo }: Props) => {
 
   const { title, description, created, deadline, completed } = todo
-  
+
   const remaining = useCountDown(deadline)
 
   return (
@@ -35,8 +34,9 @@ export const TodoItem = ({ todo, setCompleted, removeTodo }: Props) => {
 
     >
       <CardHeader className="h-full">
-
-        <X className="text-red-500 size-7 cursor-pointer top-4 absolute right-7" onClick={() => {removeTodo(todo.id)}} /> 
+        <div className="flex justify-center items-center h-6 w-6 bg-black rounded-4xl cursor-pointer absolute -right-2 -top-2">
+          <Minus className="text-white " onClick={() => { removeTodo(todo.id) }} />
+        </div>
         <CardTitle className="pb-2">{title}</CardTitle>
         <CardDescription className={cn({
           'text-green-600': completed
@@ -45,7 +45,9 @@ export const TodoItem = ({ todo, setCompleted, removeTodo }: Props) => {
         </CardDescription>
       </CardHeader>
       <CardContent className="text-xs sm:text-sm">
-        <p>Remaining Time: {!completed ? formatMMSS(remaining) : '00'}</p>
+        <p>Remaining Time: {!completed
+          ? (!formatMMSS(remaining).includes('00:00:00')) ? formatMMSS(remaining) : (<span className="text-red-500">Expired</span>)
+          : 'Completed'}</p>
         <p>Created: {formatDateToShow(created)}</p>
         <p>Deadline: {formatDateToShow(deadline)}</p>
       </CardContent>

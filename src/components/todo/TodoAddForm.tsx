@@ -8,19 +8,20 @@ import { useForm, type SubmitHandler } from "react-hook-form"
 import { Form, FormField } from "../ui/form"
 import { buildFromDateTime } from "./helpers/buildFromDateTime"
 import { cn } from "@/lib/utils"
+import type { MouseEvent } from "react"
 
 interface Props {
   addTodo: (todo: Todo) => void
 }
 
-export interface FormInputs { 
+export interface FormInputs {
   title: string | undefined;
   description: string | undefined;
   dateTime: {
-    date: Date ;
+    date: Date;
     time: string;
   }
- }
+}
 
 export const TodoAddForm = ({ addTodo }: Props) => {
 
@@ -28,21 +29,21 @@ export const TodoAddForm = ({ addTodo }: Props) => {
     defaultValues: {
       title: '',
       description: '',
-      dateTime:{
+      dateTime: {
         date: new Date(),
-        time: new Date().toTimeString().slice(0,8),
+        time: new Date().toTimeString().slice(0, 8),
       }
     },
   })
 
-  const {errors} = form.formState
+  const { errors } = form.formState
 
   const onSubmit: SubmitHandler<FormInputs> = (data) => {
-    const {date, time} = data.dateTime
-    if(!date || !time) return
+    const { date, time } = data.dateTime
+    if (!date || !time) return
 
     const deadline: Date = buildFromDateTime(date, time)
-    const {title, description} = form.getValues()
+    const { title, description } = form.getValues()
     const newTodo: Todo = {
       id: new Date().getTime(),
       title: title || '',
@@ -55,11 +56,29 @@ export const TodoAddForm = ({ addTodo }: Props) => {
     form.reset()
   }
 
+  const handleReset = (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+    e.preventDefault()
+    form.reset()
+  }
+
   return (
     <Form {...form}>
-      <form className="flex flex-col gap-5 h-full border border-border self-center sm:self-baseline p-5 rounded-2xl w-full max-w-96" onSubmit={form.handleSubmit(onSubmit)}>
+      <form className="
+        flex 
+        flex-col 
+        gap-5 
+        h-full 
+        border 
+        border-gray-200 
+        self-center 
+        sm:self-baseline 
+        p-5 
+        rounded-2xl 
+        w-full 
+        max-w-96
+        " onSubmit={form.handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-2">
-          <Label htmlFor="title">Title</Label>
+          <Label htmlFor="title" className="text-white">Title</Label>
           <Input
             id="title"
             placeholder="What are you going to do today?"
@@ -74,7 +93,7 @@ export const TodoAddForm = ({ addTodo }: Props) => {
           {errors.title ? <p className="text-xs text-red-500">Title should be 6 characters at least</p> : ''}
         </div>
         <div className="flex flex-col gap-2">
-          <Label htmlFor="description">Description</Label>
+          <Label htmlFor="description" className="text-white">Description</Label>
           <Textarea
             id="description"
             placeholder="Write a brief description..."
@@ -91,14 +110,14 @@ export const TodoAddForm = ({ addTodo }: Props) => {
           <FormField
             name="dateTime"
             control={form.control}
-            render={({ field }) => (<DatePicker field={field}/>)}
+            render={({ field }) => (<DatePicker field={field} />)}
           />
         </div>
         <div className="flex flex-col gap-2">
           <Button type="submit" className="w-full">
             Create task
           </Button>
-          <Button variant="outline" className="w-full" onClick={() => { }}>
+          <Button variant="outline" className="w-full" onClick={handleReset}>
             Reset fields
           </Button>
         </div>

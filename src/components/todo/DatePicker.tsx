@@ -19,12 +19,12 @@ interface Props {
 }
 
 export const DatePicker = ({ field: dateTime }: Props) => {
-
   const [open, setOpen] = React.useState(false)
+
   return (
     <FieldGroup className="flex-row">
       <Field>
-        <FieldLabel htmlFor="date-picker-optional">Date</FieldLabel>
+        <FieldLabel htmlFor="date-picker-optional" className="text-white">Date</FieldLabel>
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>
             <Button
@@ -54,12 +54,11 @@ export const DatePicker = ({ field: dateTime }: Props) => {
         </Popover>
       </Field>
       <Field className="w-32">
-        <FieldLabel htmlFor="time-picker-optional">Time</FieldLabel>
+        <FieldLabel htmlFor="time-picker-optional" className="text-white">Time</FieldLabel>
         <Input
           type="time"
           id="time-picker-optional"
           step="1"
-          defaultValue={new Date().toTimeString().slice(0,8)}
           onChange={(e) => {
             dateTime.onChange({
               ...dateTime.value,
